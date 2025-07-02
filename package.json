@@ -4,15 +4,24 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --host --port 3000",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@hookform/resolvers": "^5.1.1",
     "@tailwindcss/vite": "^4.1.11",
+    "classnames": "^2.5.1",
+    "delay": "^6.0.0",
     "react": "^19.1.0",
+    "react-day-picker": "^9.7.0",
     "react-dom": "^19.1.0",
+    "react-hook-form": "^7.59.0",
+    "react-hot-toast": "^2.5.2",
+    "react-router": "^7.6.3",
+    "react-router-dom": "^7.6.3",
+    "react-spinners": "^0.17.0",
     "tailwindcss": "^4.1.11"
   },
   "devDependencies": {
