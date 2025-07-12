@@ -1,11 +1,12 @@
 import type { ReactNode } from "react";
 import { FaMessage } from "react-icons/fa6";
 import { GoBellFill } from "react-icons/go";
+import { Link } from "react-router";
 import AppointmentIcon from "../../assets/appointment.svg";
 import MedicalRecordIcon from "../../assets/medrecord.svg";
 import PillIcon from "../../assets/pill.svg";
 import AvatarImg from "../../assets/profile/user-default.svg";
-import { PAGE_PADDING_INLINE } from "../../lib/definitions";
+import { NAVIGATION, PAGE_PADDING_INLINE } from "../../lib/definitions";
 
 const HomePage = () => {
   return (
@@ -67,14 +68,16 @@ type QuickAccessBoxProp = {
 
 const QuickAccessBox: React.FC<QuickAccessBoxProp> = ({ title, imgIcon }) => {
   return (
-    <div className="bg-pry w-[180px] h-[120px] rounded-xl shadow flex flex-col justify-center items-center cursor-pointer transition-all hover:shadow-xl">
-      <img
-        className="w-[40px]"
-        src={imgIcon}
-        alt="Profile"
-      />
-      <p className="mt-2 text-white font-medium">{title}</p>
-    </div>
+    <Link to={NAVIGATION.APPOINTMENTS}>
+        <div className="bg-pry w-[180px] h-[120px] rounded-xl shadow flex flex-col justify-center items-center cursor-pointer transition-all hover:shadow-xl">
+          <img
+            className="w-[40px]"
+            src={imgIcon}
+            alt="Profile"
+          />
+          <p className="mt-2 text-white font-medium">{title}</p>
+      </div>
+    </Link>
   )
 }
 

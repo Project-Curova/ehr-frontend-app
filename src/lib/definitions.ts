@@ -12,6 +12,7 @@ export enum NAVIGATION {
     // VERIFY_OTP = `${LOGIN}/verify`,
     // VALIDATE_OTP = `${LOGIN}/validate`,
     FORGOT_PASSWORD = `${LOGIN}/authgen`,
+    APPOINTMENTS = `/appointments`
     // PASSWORD_RESET = `${LOGIN}/reset`,
     // LOGIN_PROFILE_UPDATE = `${LOGIN}/update`,
     // LOGOUT = "/logout",

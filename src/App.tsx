@@ -1,7 +1,7 @@
 import { createBrowserRouter, RouterProvider, type RouteObject, } from "react-router-dom";
 import WebLayout from "./layouts/WebLayout";
 import { NAVIGATION } from "./lib/definitions";
-import { HomePage } from "./pages";
+import { AppointmentPage, HomePage } from "./pages";
 import { LoginPage } from "./pages/auth";
 import ErrorPage from "./pages/error/ErrorPage";
 
@@ -17,6 +17,10 @@ import ErrorPage from "./pages/error/ErrorPage";
             {
               index: true,
               element: <HomePage />
+            },
+            {
+              path: `${NAVIGATION.APPOINTMENTS}`,
+              element: <AppointmentPage />
             },
           ]
         },
