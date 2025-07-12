@@ -1,11 +1,8 @@
-import classNames from "classnames";
 import { Outlet } from "react-router-dom";
 import { NavigationContextProvider } from "../contexts/NavigationContext";
-import useIsMobile from "../hooks/useIsMobile";
+import { MAX_DESKTOP_WIDTH } from "../lib/definitions";
 
 const WebLayout: React.FC = () => {
-
-    const isMobile = useIsMobile();
 
     return (
         <NavigationContextProvider>
@@ -14,10 +11,7 @@ const WebLayout: React.FC = () => {
             {/* <NavigationBar /> */}
 
             <main
-                className={classNames({
-                    'min-h-screen bg-gray-100 bbg-[#F5F2F0]': true,
-                    "lg:pl-[250px] ": !isMobile
-                })}
+                style={{width: `${MAX_DESKTOP_WIDTH}px`, margin: "auto"}}
             >
                 <div>
                     <Outlet />

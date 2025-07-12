@@ -3,7 +3,7 @@ import classNames from "classnames";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import { Toaster } from "react-hot-toast";
-import { Link } from "react-router";
+import { Link, useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 import Activ8Logo from "../../../assets/Activ8Logo.svg";
 import EyeClose from "../../../assets/auth/eye_close.svg";
@@ -38,7 +38,7 @@ const LoginPage = () => {
 
 const Login: React.FC = () => {
 
-    // const navigate = useNavigate();
+    const navigate = useNavigate();
 
     const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
@@ -49,6 +49,7 @@ const Login: React.FC = () => {
 
     const onSubmit: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
         console.log(data);
+        navigate(NAVIGATION.HOME)
     };
 
     return (

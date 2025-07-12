@@ -25,3 +25,7 @@ export const override: CSSProperties = {
     margin: "0 auto",
     borderColor: "red",
 };
+
+
+export const MAX_DESKTOP_WIDTH =  900;
+export const PAGE_PADDING_INLINE = 20;
