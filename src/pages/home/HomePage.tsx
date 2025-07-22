@@ -31,10 +31,10 @@ const HomePage = () => {
             <h2 className="text-xl pb-2 font-bold">Quick Access</h2>
 
             <div className="mt-2 flex flex-wrap gap-x-3 gap-y-3">
-              <QuickAccessBox title="Appointments" imgIcon={AppointmentIcon} />
-              <QuickAccessBox title="Medical Records" imgIcon={MedicalRecordIcon} />
-              <QuickAccessBox title="Billings" imgIcon={PillIcon} />
-              <QuickAccessBox title="Prescriptions" imgIcon={PillIcon} />
+              <QuickAccessBox title="Appointments" imgIcon={AppointmentIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
+              <QuickAccessBox title="Medical Records" imgIcon={MedicalRecordIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
+              <QuickAccessBox title="Billings" imgIcon={PillIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
+              <QuickAccessBox title="Prescriptions" imgIcon={PillIcon} destinationLink={NAVIGATION.PRESCRIPTIONS} />
             </div>
           </section>
         </div>
@@ -64,11 +64,12 @@ const TopNavigation = () => {
 type QuickAccessBoxProp = {
   title: string
   imgIcon: string
+  destinationLink: string
 }
 
-const QuickAccessBox: React.FC<QuickAccessBoxProp> = ({ title, imgIcon }) => {
+const QuickAccessBox: React.FC<QuickAccessBoxProp> = ({ title, imgIcon, destinationLink }) => {
   return (
-    <Link to={NAVIGATION.APPOINTMENTS}>
+    <Link to={destinationLink}>
         <div className="bg-pry w-[180px] h-[120px] rounded-xl shadow flex flex-col justify-center items-center cursor-pointer transition-all hover:shadow-xl">
           <img
             className="w-[40px]"

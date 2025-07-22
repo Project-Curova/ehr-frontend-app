@@ -12,7 +12,8 @@ export enum NAVIGATION {
     // VERIFY_OTP = `${LOGIN}/verify`,
     // VALIDATE_OTP = `${LOGIN}/validate`,
     FORGOT_PASSWORD = `${LOGIN}/authgen`,
-    APPOINTMENTS = `/appointments`
+    APPOINTMENTS = `/appointments`,
+    PRESCRIPTIONS = `/prescriptions`,
     // PASSWORD_RESET = `${LOGIN}/reset`,
     // LOGIN_PROFILE_UPDATE = `${LOGIN}/update`,
     // LOGOUT = "/logout",
@@ -30,3 +31,13 @@ export const override: CSSProperties = {
 
 export const MAX_DESKTOP_WIDTH =  900;
 export const PAGE_PADDING_INLINE = 20;
+
+export type MEDICATION = {
+    name: string,
+    dosage: string
+}
+
+export type SELECT_PHARMACY = {
+    name: string,
+    dist: string
+}
