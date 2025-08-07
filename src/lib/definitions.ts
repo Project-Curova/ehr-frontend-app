@@ -14,6 +14,8 @@ export enum NAVIGATION {
     FORGOT_PASSWORD = `${LOGIN}/authgen`,
     APPOINTMENTS = `/appointments`,
     PRESCRIPTIONS = `/prescriptions`,
+    RECORDS = `/records`,
+    BILLING = `/bill`,
     // PASSWORD_RESET = `${LOGIN}/reset`,
     // LOGIN_PROFILE_UPDATE = `${LOGIN}/update`,
     // LOGOUT = "/logout",

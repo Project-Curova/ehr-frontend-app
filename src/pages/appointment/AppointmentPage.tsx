@@ -145,7 +145,7 @@ const SelectDateAndTime = () => {
 const PatientDetailsForm: React.FC = () => {
 
     /***************************** FORM VALIDATION ******************************/
-    const { register, handleSubmit, watch, control, formState: { errors, isValid }, setValue } = useForm<PatientDetailFormData>({ resolver: zodResolver(PatentDetailSchema) });
+    const { register, handleSubmit, formState: { errors, isValid } } = useForm<PatientDetailFormData>({ resolver: zodResolver(PatentDetailSchema) });
 
     const onSubmit: SubmitHandler<PatientDetailFormData> = (data: PatientDetailFormData) => {
         console.log(data);

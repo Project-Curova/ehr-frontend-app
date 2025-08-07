@@ -32,8 +32,8 @@ const HomePage = () => {
 
             <div className="mt-2 flex flex-wrap gap-x-3 gap-y-3">
               <QuickAccessBox title="Appointments" imgIcon={AppointmentIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
-              <QuickAccessBox title="Medical Records" imgIcon={MedicalRecordIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
-              <QuickAccessBox title="Billings" imgIcon={PillIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
+              <QuickAccessBox title="Medical Records" imgIcon={MedicalRecordIcon} destinationLink={NAVIGATION.RECORDS}/>
+              <QuickAccessBox title="Billings" imgIcon={PillIcon} destinationLink={NAVIGATION.BILLING}/>
               <QuickAccessBox title="Prescriptions" imgIcon={PillIcon} destinationLink={NAVIGATION.PRESCRIPTIONS} />
             </div>
           </section>
