@@ -47,7 +47,7 @@ export const authApi = emptySplitApi.injectEndpoints({
 
         signin: builder.mutation<SignInResponse, SignInRequest>({
             query: (credentials) => ({
-                url: 'login',
+                url: 'login/',
                 method: 'POST',
                 body: credentials,
             }),
@@ -55,7 +55,7 @@ export const authApi = emptySplitApi.injectEndpoints({
 
         signup: builder.mutation<SignupResponse, SignupRequest>({
             query: (credentials) => ({
-                url: 'register',
+                url: 'register/',
                 method: 'POST',
                 body: credentials,
             }),

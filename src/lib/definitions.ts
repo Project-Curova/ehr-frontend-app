@@ -2,7 +2,7 @@ import type { CSSProperties } from "react";
 
 export const MOBILE_CONSTRAINT = 1023;
 
-export const APP_BASE_URL = "https://project-curova-2.onrender.com/";
+export const APP_BASE_URL = "https://project-curova-2.onrender.com/userapi/";
 
 export enum NAVIGATION {
     HOME = "/",

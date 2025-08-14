@@ -9,12 +9,19 @@ import { useSignupMutation } from "../../../app/services/auth/auth";
 import Activ8Logo from "../../../assets/Activ8Logo.svg";
 import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
-import { SignUpSchema, type SignUpFormData, type SignupResponse } from "../../../lib/auth/authLib";
+import { SignUpSchema, type SignUpFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override, SIGN_UP_TYPE } from "../../../lib/definitions";
 
 const SignUpPage = () => {
     return (
         <div id="login" className="block md:grid grid-cols-2 h-screen">
+            {/* Login Hero Image */}
+            <div className="hidden md:flex px-8 flex-col justify-center items-center">
+                <div id="hero" className="h-[90vh] px-12 w-full max-w-[1000px] max-h-1000px rounded-xl">
+                    <h3 className="mt-[12%] text-white font-Inter-Bold text-[30px]">Your gateway to a <br /> smarter lifestyle.</h3>
+                </div>
+            </div>
+
             {/* Login Form */}
             <div className="px-5 sm:px-12 py-9 pt-7 bg-PrimaryColor-50 h-full overflow-y-auto">
                 <div className="w-full max-w-[450px] mx-auto">
@@ -23,13 +30,6 @@ const SignUpPage = () => {
                     <h1 className="font-HelveticaNeue-Bold text-xl text-pry  sm:text-2xl text-center mt-5 mb-2">Welcome to Curova</h1>
                     {/* <p className="text-sub-info  leading-normal">Before you use the features in the Activ8 application, <br /> please sign in first.</p> */}
                     <SignupForm />
-                </div>
-            </div>
-
-            {/* Login Hero Image */}
-            <div className="hidden md:flex px-8 flex-col justify-center items-center">
-                <div id="hero" className="h-[90vh] px-12 w-full max-w-[1000px] max-h-1000px rounded-xl">
-                    <h3 className="mt-[12%] text-white font-Inter-Bold text-[30px]">Your gateway to a <br /> smarter lifestyle.</h3>
                 </div>
             </div>
         </div>
@@ -54,20 +54,20 @@ const SignupForm: React.FC = () => {
         const { email, username, password, state, country, fullname } = userData;
         const is_superuser = false;
         const is_staff = false;
-        const dob = "";
+        const dob = "2025-09-11";
 
         try {
             // Sign Up user
-            const response = await signUpUser({ email, username, password, country, state, fullname, is_staff, dob, is_superuser, type: SIGN_UP_TYPE.P }).unwrap();
+            const response = await signUpUser({ email, username, password, country, state, full_name: fullname, is_staff, dob, is_superuser, type: SIGN_UP_TYPE.P }).unwrap();
             console.log(response);
             navigate(NAVIGATION.LOGIN)
         } catch (error) {
             if (typeof error == 'object' && error != null) {
-                const errorMessage = (error as SignupResponse).data.message
-                toast.error(errorMessage);
+                const response = (error as any).data.detail;
+                toast.error(response);
             }
             else {
-                toast.error("An unknown error has occurred!");
+                toast.error("Unable to sign up!");
             }
         }
     }

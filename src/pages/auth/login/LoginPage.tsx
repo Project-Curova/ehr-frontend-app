@@ -2,9 +2,10 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import classNames from "classnames";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
-import { Toaster } from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
+import { useSigninMutation } from "../../../app/services/auth/auth";
 import Activ8Logo from "../../../assets/Activ8Logo.svg";
 import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
@@ -45,11 +46,30 @@ const Login: React.FC = () => {
       /***************************** FORM VALIDATION ******************************/
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
-    // const [verificationOpen, setVerificationOpen] = useState<string | null>(null);
+    const [signInUser, { isLoading: isSignInUserLoading }] = useSigninMutation();
+
+     // Submit from details to server and verify OTP
+    async function loginUser(userData: LoginFormData) {
+
+        try {
+            // Verify user email
+            const response = await signInUser({ username: userData.username, password: userData.password }).unwrap();
+            console.log(response);
+
+            navigate(NAVIGATION.HOME);
+        } catch (error) {
+            if (typeof error == 'object' && error != null) {
+                const response = (error as any).data.detail;
+                toast.error(response);
+            }
+            else {
+                toast.error("Unable to sign in!");
+            }
+        }
+    }
 
     const onSubmit: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
-        console.log(data);
-        navigate(NAVIGATION.HOME)
+        loginUser(data);
     };
 
     return (
@@ -59,14 +79,14 @@ const Login: React.FC = () => {
                     <div>
                         <div className="flex justify-between items-center font-Manrope-Medium text-[14px]">
                             <label htmlFor="email" className="text-sm">
-                                Email Address <span className="text-red-500">*</span>
+                                Username <span className="text-red-500">*</span>
                             </label>
-                            {errors.email?.message && (<span className="text-red-700 text-sm">{errors.email?.message}</span>)}
+                            {errors.username?.message && (<span className="text-red-700 text-sm">{errors.username?.message}</span>)}
                         </div>
                         <input
-                            {...register("email")}
-                            type="email"
-                            placeholder="Enter your email"
+                            {...register("username")}
+                            type="text"
+                            placeholder="Enter your username"
                             className="mt-1 bg-white block w-full p-3 rounded-md shadow-sm sm:text-sm  outline-none focus:border focus:border-PrimaryColor-600"
                         />
                     </div>
@@ -97,7 +117,7 @@ const Login: React.FC = () => {
                     className={classNames({
                         'rounded px-[2rem] py-3 w-full text-PrimaryColor-50 mt-9 bg-[#12076F] text-white': true,
                     })}
-                >   {false ? (
+                >   {isSignInUserLoading ? (
                     <BeatLoader
                         color={"#ffffff"}
                         loading={true}

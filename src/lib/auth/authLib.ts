@@ -3,7 +3,7 @@ import type { SIGN_UP_TYPE } from "../definitions";
 
 export const LoginSchema = z.object({
     password: z.string().min(1, "Password is required"),
-    email: z.string({ message: "Email is required", }).email({ message: "Invalid email address" }),
+    username: z.string().min(1, "Username is required"),
 })
 
 export const PatentDetailSchema = z.object({
@@ -46,7 +46,7 @@ export type SignUpFormData = z.infer<typeof SignUpSchema>;
 
 // Sign up request type 
 export type SignupRequest = {
-    fullname: string,
+    full_name: string,
     username: string,
     email: string,
     dob: string,
