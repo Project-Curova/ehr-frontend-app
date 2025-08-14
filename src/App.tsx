@@ -1,8 +1,11 @@
 import { createBrowserRouter, RouterProvider, type RouteObject, } from "react-router-dom";
+import { PersistGate } from "redux-persist/integration/react";
+import { persistor } from "./app/store";
+import Loader from "./components/global/Loader";
 import WebLayout from "./layouts/WebLayout";
 import { NAVIGATION } from "./lib/definitions";
 import { AppointmentPage, HomePage, MedicalRecords, PrescriptionPage } from "./pages";
-import { LoginPage } from "./pages/auth";
+import { LoginPage, SignUpPage } from "./pages/auth";
 import ErrorPage from "./pages/error/ErrorPage";
 
  const routes: RouteObject[] = [
@@ -43,18 +46,21 @@ import ErrorPage from "./pages/error/ErrorPage";
           path: NAVIGATION.LOGIN,
           element: <LoginPage />
         },
+        {
+          path: NAVIGATION.SIGNUP,
+          element: <SignUpPage />
+        },
       ]
     },
   ];
 
 const router = createBrowserRouter(routes)
 
-
 function App() {
   return (
-    <>
+    <PersistGate loading={<Loader />} persistor={persistor}>
       <RouterProvider router={router} />
-    </>
+    </PersistGate>
   )
 }
 

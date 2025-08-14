@@ -1,0 +1,18 @@
+.svg-water-fill {
+  animation: water-fill 4s infinite ease-in-out;
+}
+
+
+@keyframes water-fill {
+  0% {
+    clip-path: inset(100% 0 0 0);
+  }
+
+  50% {
+    clip-path: inset(0 0 0 0);
+  }
+
+  100% {
+    clip-path: inset(100% 0 0 0);
+  }
+}

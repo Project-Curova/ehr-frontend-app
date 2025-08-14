@@ -2,6 +2,8 @@ import type { CSSProperties } from "react";
 
 export const MOBILE_CONSTRAINT = 1023;
 
+export const APP_BASE_URL = "https://project-curova-2.onrender.com/";
+
 export enum NAVIGATION {
     HOME = "/",
 
@@ -42,4 +44,10 @@ export type MEDICATION = {
 export type SELECT_PHARMACY = {
     name: string,
     dist: string
+}
+
+export enum SIGN_UP_TYPE {
+    H = "H",
+    S = "S",
+    P = "P"
 }
