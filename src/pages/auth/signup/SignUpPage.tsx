@@ -47,7 +47,9 @@ const SignupForm: React.FC = () => {
     const [signUpUser, { isLoading: isSignUpUserLoading }] = useSignupMutation();
 
     /***************************** FORM VALIDATION ******************************/
-    const { register, handleSubmit, formState: { errors } } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
+    const { register, handleSubmit, watch, formState: { errors } } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
+
+    const passwordWatcher = watch("password","");
 
       // Submit from details to server and verify OTP
     async function signupUser(userData: SignUpFormData) {
@@ -185,7 +187,8 @@ const SignupForm: React.FC = () => {
                                 {passwordShown ? <img src={EyeOpen} alt="password visible" /> : <img src={EyeClose} alt="password visible" />}
                             </div>
                         </div>
-                        <p className="text-red-500 font-OpenSans-Medium block text-start mt-2 text-xs">Must be at lest 6 characters</p>
+
+                        {(passwordWatcher.length < 6) && <p className="text-red-500 font-OpenSans-Medium block text-start mt-2 text-xs">Must be at lest 6 characters</p>}
                     </div>
 
                     <div className="mt-">
