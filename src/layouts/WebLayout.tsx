@@ -11,7 +11,7 @@ const WebLayout: React.FC = () => {
             {/* <NavigationBar /> */}
 
             <main
-                style={{width: `${MAX_DESKTOP_WIDTH}px`, margin: "auto"}}
+                style={{maxWidth: `${MAX_DESKTOP_WIDTH}px`, margin: "auto"}}
             >
                 <div>
                     <Outlet />

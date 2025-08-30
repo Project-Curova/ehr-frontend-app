@@ -37,10 +37,10 @@ const SelectConsultation: React.FC = () => {
                     <p className="font-medium">Step 1: Select Consultation</p>
                 </div>
 
-                <div className="flex gap-x-[-5px] mt-4">
-                    <div className="bg-pry text-white py-2 w-[150px] flex justify-center rounded cursor-pointer hover:shadow-sm">In Person Visit</div>
-                    <div className="text-black border border-[#e6e2e2] border-l-0 py-2 w-[170px] flex justify-center rounded transition-all -translate-x-0.5 cursor-pointer hover:shadow-sm">Video Consultation</div>
-                    <div className="text-black border border-[#e6e2e2] border-l-0 py-2 w-[150px] flex justify-center rounded transition-all -translate-x-0.5 cursor-pointer hover:shadow-sm">Phone Call</div>
+                <div className="flex flex-col sm:flex-row gap-x-[-5px] mt-4">
+                    <div className="bg-pry text-white py-2 w-full sm:w-[150px] flex justify-center rounded cursor-pointer hover:shadow-sm">In Person Visit</div>
+                    <div className="text-black border border-[#e6e2e2] border-l-0 py-2 w-full sm:w-[170px] flex justify-center rounded transition-all -translate-x-0.5 cursor-pointer hover:shadow-sm">Video Consultation</div>
+                    <div className="text-black border border-[#e6e2e2] border-l-0 py-2 w-full  sm:w-[150px] flex justify-center rounded transition-all -translate-x-0.5 cursor-pointer hover:shadow-sm">Phone Call</div>
                 </div>
             </div>
         </>
@@ -72,7 +72,7 @@ const ChooseSpecialty: React.FC = () => {
                         onChange={(e) => {
                             setSpecialty(e)
                         }}
-                        className="w-[400px] mt-5"
+                        className="w-full max-w-[400px] mt-5"
                     >
                         {specialties.map((specialty, index) => {
                             return (
@@ -184,7 +184,7 @@ const PatientDetailsForm: React.FC = () => {
                     </div>
 
 
-                    <div className="grid [grid-template-columns:2fr_3fr] gap-x-2">
+                    <div className="grid sm:[grid-template-columns:2fr_3fr] gap-2">
                         {/* Date of Birth */}
                         <div onClick={() => setSelectDate(true)}>
                             <label htmlFor="username" className="text-sm">

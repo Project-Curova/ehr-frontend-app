@@ -115,7 +115,7 @@ const Login: React.FC = () => {
 
                 <button
                     className={classNames({
-                        'rounded px-[2rem] py-3 w-full text-PrimaryColor-50 mt-9 bg-[#12076F] text-white': true,
+                        'rounded px-[2rem] py-3 w-full text-PrimaryColor-50 mt-9 bg-pry text-white': true,
                     })}
                 >   {isSignInUserLoading ? (
                     <BeatLoader

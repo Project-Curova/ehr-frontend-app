@@ -2,9 +2,10 @@ import { createBrowserRouter, RouterProvider, type RouteObject, } from "react-ro
 import { PersistGate } from "redux-persist/integration/react";
 import { persistor } from "./app/store";
 import Loader from "./components/global/Loader";
+import { AppointmentPageLayout, HomePageLayout } from "./layouts";
 import WebLayout from "./layouts/WebLayout";
 import { NAVIGATION } from "./lib/definitions";
-import { AppointmentPage, HomePage, MedicalRecords, PrescriptionPage } from "./pages";
+import { BillingPage, MedicalRecords, PrescriptionPage } from "./pages";
 import { LoginPage, SignUpPage } from "./pages/auth";
 import ErrorPage from "./pages/error/ErrorPage";
 
@@ -19,11 +20,11 @@ import ErrorPage from "./pages/error/ErrorPage";
           children: [
             {
               index: true,
-              element: <HomePage />
+              element: <HomePageLayout />
             },
             {
               path: `${NAVIGATION.APPOINTMENTS}`,
-              element: <AppointmentPage />
+              element: <AppointmentPageLayout />
             },
             {
               path: `${NAVIGATION.PRESCRIPTIONS}`,
@@ -36,7 +37,7 @@ import ErrorPage from "./pages/error/ErrorPage";
             
               {
               path: `${NAVIGATION.BILLING}`,
-              element: <MedicalRecords />
+              element: <BillingPage />
             },
           ]
         },

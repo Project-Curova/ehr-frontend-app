@@ -98,7 +98,7 @@ const ReviewMedication: React.FC = () => {
             <div>
                 <button
                     className={classNames({
-                        'rounded-xl px-[2rem] py-3 w-full text-PrimaryColor-50 mt-9 bg-pry text-white font-medium text-xl': true,
+                        'rounded-xl px-[2rem] cursor-pointer py-3 w-full text-PrimaryColor-50 mt-9 bg-pry text-white font-medium text-xl': true,
                     })}
                 >Send Prescription</button>
             </div>
@@ -135,7 +135,7 @@ const SelectPharmacy: React.FC<SelectPharmacyProp> = ({action}) => {
 
 
     return (
-        <div className="w-[380px]">
+        <div className="w-[85vw] max-w-[380px]">
             {/* AI Recommendation */}
             <div className="border border-gray-400 rounded p-5 mt-5">
                 <div className="text-sm flex justify-between items-center">
@@ -163,9 +163,9 @@ const SelectPharmacy: React.FC<SelectPharmacyProp> = ({action}) => {
                                     <IoIosAddCircle size={30} color="green" />
                                 </div>
                                 <div className="w-full">
-                                    <div className="flex justify-between">
-                                        <p className="font-medium">{pharmacy.name}</p>
-                                        <p className="text-xs text-pry font-normal mt-2">OPEN NOW</p>
+                                    <div className="flex justify-between items-center">
+                                        <p className="font-medium mr-2">{pharmacy.name}</p>
+                                        <p className="text-xs text-pry font-normal w-[10ch] mt-2">OPEN NOW</p>
                                     </div>
                                     <p className="text-sm text-gray-500">{pharmacy.dist}</p>
                                 </div>

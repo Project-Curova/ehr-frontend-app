@@ -54,3 +54,4 @@ export function getFormattedDate(date: Date = new Date()) {
 
     return { year, month, monthShort, day, time, hours, minutes };
 }
+

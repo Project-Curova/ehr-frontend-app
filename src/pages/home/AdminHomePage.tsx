@@ -31,10 +31,10 @@ const HomePage = () => {
             <h2 className="text-xl pb-2 font-bold">Quick Access</h2>
 
             <div className="mt-2 flex flex-wrap gap-x-3 gap-y-3">
-              <QuickAccessBox title="Appointments" imgIcon={AppointmentIcon} destinationLink={NAVIGATION.APPOINTMENTS}/>
-              <QuickAccessBox title="Medical Records" imgIcon={MedicalRecordIcon} destinationLink={NAVIGATION.RECORDS}/>
-              <QuickAccessBox title="Billings" imgIcon={PillIcon} destinationLink={NAVIGATION.BILLING}/>
-              <QuickAccessBox title="Prescriptions" imgIcon={PillIcon} destinationLink={NAVIGATION.PRESCRIPTIONS} />
+              <QuickAccessBox title="Add Patient" imgIcon={AppointmentIcon} destinationLink={NAVIGATION.APPOINTMENTS} />
+              <QuickAccessBox title="Schedule" imgIcon={MedicalRecordIcon} destinationLink={NAVIGATION.APPOINTMENTS} />
+              <QuickAccessBox title="Upload Records" imgIcon={PillIcon} destinationLink={NAVIGATION.BILLING} />
+              <QuickAccessBox title="Generate Reports" imgIcon={PillIcon} destinationLink={NAVIGATION.PRESCRIPTIONS} />
             </div>
           </section>
         </div>
@@ -45,7 +45,7 @@ const HomePage = () => {
 
 const TopNavigation = () => {
   return (
-    <div className="py-3 mb-3 w-full border-b border-b-[#e6e2e2] px-3 flex justify-between">
+    <div className="py-3 mb-3 border-b border-b-[#e6e2e2] px-3 flex justify-between">
       <div></div>
       <div className="flex items-center gap-x-5">
         <div className="cursor-pointer">
@@ -53,7 +53,7 @@ const TopNavigation = () => {
         </div>
         <img
           className="rounded-full w-[3rem] h-[3rem] object-cover cursor-pointer"
-          src={AvatarImg}
+          src={AvatarImg} // Placeholder image for profile
           alt="Profile"
         />
       </div>
@@ -70,13 +70,13 @@ type QuickAccessBoxProp = {
 const QuickAccessBox: React.FC<QuickAccessBoxProp> = ({ title, imgIcon, destinationLink }) => {
   return (
     <Link to={destinationLink}>
-        <div className="bg-pry w-[120px] h-[100px] sm:w-[180px] sm:h-[120px] rounded-xl shadow flex flex-col justify-center items-center cursor-pointer transition-all hover:shadow-xl">
-          <img
-            className="w-[8vw] max-w-[40px]"
-            src={imgIcon}
-            alt="Profile"
-          />
-          <p className="mt-2 text-sm text-white font-medium">{title}</p>
+      <div className="bg-pry w-[120px] h-[100px] sm:w-[180px] sm:h-[120px] rounded-xl shadow flex flex-col justify-center items-center cursor-pointer transition-all hover:shadow-xl">
+        <img
+          className="w-[8vw] max-w-[40px]"
+          src={imgIcon}
+          alt="Profile"
+        />
+        <p className="mt-2 text-sm text-white font-medium">{title}</p>
       </div>
     </Link>
   )
@@ -87,15 +87,15 @@ type AlertBoxProp = {
   imgIcon: ReactNode
 }
 
-const AlertBox: React.FC<AlertBoxProp> = ({message, imgIcon}) => {
+const AlertBox: React.FC<AlertBoxProp> = ({ message, imgIcon }) => {
   return (
     <div className="bg-[#E8EEF9] p-4 flex items-center gap-x-5 rounded sm:w-[80%] md:w-[50%]">
-        <div>
-          {imgIcon}
-        </div>
-        <p className="max-w-[40ch]">{message}</p>
+      <div>
+        {imgIcon}
+      </div>
+      <p className="max-w-[40ch]">{message}</p>
     </div>
-  ) 
+  )
 }
 
 export default HomePage
