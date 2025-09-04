@@ -4,6 +4,7 @@ import classNames from "classnames";
 import dayjs from "dayjs";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
+import { TopNavigation } from "../../components";
 import Modal from "../../components/global/Modal";
 import ScheduleDatePicker from "../../components/global/ScheduleDatePicker";
 import { PatentDetailSchema, type PatientDetailFormData } from "../../lib/auth/authLib";
@@ -13,7 +14,9 @@ const { Option } = Select;
 
 const AppointmentPage = () => {
     return (
-        <div className="h-screen overflow-y-auto bg-bgpry py-4 pt-8">
+        <div className="h-screen overflow-y-auto bg-bgpry pb-4">
+            {/* Top Navigation */}
+            <TopNavigation title="Appointments"/>
 
             <div className="flex flex-col gap-y-8">
                 <SelectConsultation />

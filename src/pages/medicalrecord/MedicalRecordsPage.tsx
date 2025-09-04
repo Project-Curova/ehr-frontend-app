@@ -1,8 +1,12 @@
+import { TopNavigation } from "../../components"
+
 const MedicalRecordsPage = () => {
     return (
-        <div className="h-screen overflow-y-auto bg-bgpry py-4 pt-8">
+        <div className="h-screen overflow-y-auto bg-bgpry pb-4">
+            {/* Top Navigation */}
+            <TopNavigation title="Medical Records" />
+
             <div className="flex flex-col gap-y-2 w-[80%] mx-auto">
-                <h2 className="font-medium text-xl">Medical Records</h2>
                 <GeneralHealth />
 
                 <div className="mt-5">

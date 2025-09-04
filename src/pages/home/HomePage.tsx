@@ -1,11 +1,10 @@
 import type { ReactNode } from "react";
 import { FaMessage } from "react-icons/fa6";
-import { GoBellFill } from "react-icons/go";
 import { Link } from "react-router";
 import AppointmentIcon from "../../assets/appointment.svg";
 import MedicalRecordIcon from "../../assets/medrecord.svg";
 import PillIcon from "../../assets/pill.svg";
-import AvatarImg from "../../assets/profile/user-default.svg";
+import { TopNavigation } from "../../components";
 import { NAVIGATION, PAGE_PADDING_INLINE } from "../../lib/definitions";
 
 const HomePage = () => {
@@ -13,7 +12,7 @@ const HomePage = () => {
     <>
       <div className="h-screen bg-bgpry">
         {/* Top Navigation */}
-        <TopNavigation />
+        <TopNavigation homePage />
 
         <div className="flex flex-col gap-y-3">
           {/* Alerts Section */}
@@ -40,24 +39,6 @@ const HomePage = () => {
         </div>
       </div>
     </>
-  )
-}
-
-const TopNavigation = () => {
-  return (
-    <div className="py-3 mb-3 w-full border-b border-b-[#e6e2e2] px-3 flex justify-between">
-      <div></div>
-      <div className="flex items-center gap-x-5">
-        <div className="cursor-pointer">
-          <GoBellFill color="#57687E" size={25} />
-        </div>
-        <img
-          className="rounded-full w-[3rem] h-[3rem] object-cover cursor-pointer"
-          src={AvatarImg}
-          alt="Profile"
-        />
-      </div>
-    </div>
   )
 }
 

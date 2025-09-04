@@ -2,6 +2,7 @@ import { useState } from "react";
 import { IoIosCheckmarkCircle } from "react-icons/io";
 import { useNavigate } from "react-router";
 import AIBulb from "../../assets/ai_bulb.svg";
+import { TopNavigation } from "../../components";
 import ActionSuccessModal from "../../components/global/ActionSuccessModal";
 import Modal from "../../components/global/Modal";
 import { NAVIGATION } from "../../lib/definitions";
@@ -14,13 +15,15 @@ const BillingPage = () => {
 
   function onClose() {
     navigate(NAVIGATION.HOME);
-  } 
+  }
 
   return (
     <>
-      <div className="h-screen overflow-y-auto bg-bgpry py-4 pt-8">
+      <div className="h-screen overflow-y-auto bg-bgpry pb-4">
+        {/* Top Navigation */}
+        <TopNavigation title="Billings" />
+
         <div className="flex flex-col gap-y-2 w-[90%] sm:w-[80%] mx-auto">
-          <h2 className="font-medium text-xl">Billing</h2>
 
           <div className="mt-5">
             <h3>Billing Summary</h3>

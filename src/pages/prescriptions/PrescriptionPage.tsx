@@ -4,13 +4,16 @@ import { IoIosAddCircle, IoMdAdd } from "react-icons/io";
 import { IoCloseCircleSharp } from "react-icons/io5";
 import { MdCheckBox } from "react-icons/md";
 import DiagnosisImg from "../../assets/diagnosis.svg";
+import { TopNavigation } from "../../components";
 import Modal from "../../components/global/Modal";
 import type { MEDICATION, SELECT_PHARMACY } from "../../lib/definitions";
 
 
 const PrescriptionPage = () => {
     return (
-        <div className="h-screen overflow-y-auto bg-bgpry py-4 pt-8">
+        <div className="h-screen overflow-y-auto bg-bgpry pb-4">
+            {/* Top Navigation */}
+            <TopNavigation title="Prescriptions" />
 
             <div className="flex flex-col gap-y-2 w-[80%] mx-auto">
                 <AddDiagnosis />
@@ -91,7 +94,7 @@ const ReviewMedication: React.FC = () => {
             <div className="w-full flex justify-between items-center mt-5">
                 <h2 className="font-medium text-xl">Review and Select Pharmacy</h2>
             </div>
-            <button  onClick={() => setSelectPharmacy(true)} className="border py-2 px-5 w-max border-pry rounded text-sm focus:shadow-sm cursor-pointer">
+            <button onClick={() => setSelectPharmacy(true)} className="border py-2 px-5 w-max border-pry rounded text-sm focus:shadow-sm cursor-pointer">
                 Choose a phramacy
             </button>
 
@@ -116,7 +119,7 @@ type SelectPharmacyProp = {
     action: () => void;
 }
 
-const SelectPharmacy: React.FC<SelectPharmacyProp> = ({action}) => {
+const SelectPharmacy: React.FC<SelectPharmacyProp> = ({ action }) => {
 
     const list_of_pharmacies: SELECT_PHARMACY[] = [
         {
@@ -175,7 +178,7 @@ const SelectPharmacy: React.FC<SelectPharmacyProp> = ({action}) => {
                 })}
             </div>
 
-              <div>
+            <div>
                 <button
                     onClick={action}
                     className={classNames({
