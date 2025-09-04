@@ -62,8 +62,9 @@ const SignupForm: React.FC = () => {
             // Sign Up user
             const response = await signUpUser({ email, username, password, country, state, full_name: fullname, is_staff, dob, is_superuser, type: SIGN_UP_TYPE.P }).unwrap();
             console.log(response);
-            navigate(NAVIGATION.LOGIN)
+            navigate(NAVIGATION.LOGIN);
         } catch (error) {
+            console.log(error);
             if (typeof error == 'object' && error != null) {
                 const response = (error as any).data.detail;
                 toast.error(response);

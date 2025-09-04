@@ -2,10 +2,10 @@ import { useEffect, useState } from "react";
 
 // Custom hook to detect mobile viewport
 const useIsAdmin = () => {
-    const [isAdmin, setIsAdmin] = useState<boolean>(true);
+    const [isAdmin, setIsAdmin] = useState<boolean>(false);
 
     useEffect(() => {
-        setIsAdmin(true);
+        setIsAdmin(false);
     }, [])
 
     return isAdmin;
