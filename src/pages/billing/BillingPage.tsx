@@ -10,7 +10,7 @@ const BillingPage = () => {
 
   const navigate = useNavigate();
 
-  const [successModal, setSuccessModal] = useState<boolean>(true);
+  const [successModal, setSuccessModal] = useState<boolean>(false);
 
   function onClose() {
     navigate(NAVIGATION.HOME);
