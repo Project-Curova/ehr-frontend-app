@@ -6,28 +6,29 @@ import toast, { Toaster } from "react-hot-toast";
 import { Link, useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 import { useSignupMutation } from "../../../app/services/auth/auth";
-import Activ8Logo from "../../../assets/Activ8Logo.svg";
 import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
+import HeroImg from "../../../assets/hero.svg";
+import Modal from "../../../components/global/Modal";
+import ScheduleDatePicker from "../../../components/global/ScheduleDatePicker";
 import { SignUpSchema, type SignUpFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override, SIGN_UP_TYPE } from "../../../lib/definitions";
+import { formatDateToString, getFormattedDate } from "../../../utils/utils";
 
 const SignUpPage = () => {
     return (
         <div id="login" className="block md:grid grid-cols-2 h-screen">
             {/* Login Hero Image */}
-            <div className="hidden md:flex px-8 flex-col justify-center items-center">
-                <div id="hero" className="h-[90vh] px-12 w-full max-w-[1000px] max-h-1000px rounded-xl">
-                    <h3 className="mt-[12%] text-white font-Inter-Bold text-[30px]">Your gateway to a <br /> smarter lifestyle.</h3>
-                </div>
+            <div className="bg-[#033856] p-8 text-white">
+                <img src={HeroImg} className="w-[150px] mx-auto" alt="hero" />
+                <h3 className="mt-[12%] font-bold text-[30px] text-center">Welcome to Curova</h3>
+                <p className="mt-5 font-medium">The Complete Intelligence Platform for Modern Healthcare.</p>
             </div>
-
+            
             {/* Login Form */}
             <div className="px-5 sm:px-12 py-9 pt-7 bg-PrimaryColor-50 h-full overflow-y-auto">
                 <div className="w-full max-w-[450px] mx-auto">
-                    <img src={Activ8Logo} width={90} height={41} alt="Activ8 logo" className="hidden sm:block" />
-
-                    <h1 className="font-HelveticaNeue-Bold text-xl text-pry  sm:text-2xl text-center mt-5 mb-2">Welcome to Curova</h1>
+                    <h1 className="font-HelveticaNeue-Bold text-xl text-pry  sm:text-2xl text-center mt-5 mb-2">Happy to have you!</h1>
                     {/* <p className="text-sub-info  leading-normal">Before you use the features in the Activ8 application, <br /> please sign in first.</p> */}
                     <SignupForm />
                 </div>
@@ -43,25 +44,29 @@ const SignupForm: React.FC = () => {
 
     const [passwordShown, setPasswordShown] = useState<boolean>(false);
     const [confirmPasswordShown, setConfirmPasswordShown] = useState<boolean>(false);
+    const [selectedDate, setSelectedDate] = useState<Date | undefined>(undefined);
+    const [selectDate, setSelectDate] = useState<boolean>(false);
+
+    const formattedDate = getFormattedDate(selectedDate);
 
     const [signUpUser, { isLoading: isSignUpUserLoading }] = useSignupMutation();
 
     /***************************** FORM VALIDATION ******************************/
     const { register, handleSubmit, watch, formState: { errors } } = useForm<SignUpFormData>({ resolver: zodResolver(SignUpSchema) });
 
-    const passwordWatcher = watch("password","");
+    const passwordWatcher = watch("password", "");
 
-      // Submit from details to server and verify OTP
+    // Submit from details to server and verify OTP
     async function signupUser(userData: SignUpFormData) {
         const { email, username, password, state, country, fullname } = userData;
         const is_superuser = false;
         const is_staff = false;
-        const dob = "2025-09-11";
+        const dob = formatDateToString(selectedDate ?? new Date());
 
         try {
             // Sign Up user
             const response = await signUpUser({ email, username, password, country, state, full_name: fullname, is_staff, dob, is_superuser, type: SIGN_UP_TYPE.P }).unwrap();
-            console.log(response);
+            console.log(response);  
             navigate(NAVIGATION.LOGIN);
         } catch (error) {
             console.log(error);
@@ -117,6 +122,47 @@ const SignupForm: React.FC = () => {
                         />
                     </div>
 
+                    {/* Email Address */}
+                    <div>
+                        <div className="flex justify-between items-center font-Manrope-Medium text-[14px]">
+                            <label htmlFor="email" className="text-sm">
+                                Email Address <span className="text-red-500">*</span>
+                            </label>
+                            {errors.email?.message && (<span className="text-red-700 text-sm">{errors.email?.message}</span>)}
+                        </div>
+                        <input
+                            {...register("email")}
+                            type="email"
+                            placeholder="Enter your email"
+                            className="mt-1 bg-white block w-full p-3 rounded-md shadow-sm sm:text-sm  outline-none focus:border focus:border-PrimaryColor-600"
+                        />
+                    </div>
+
+                    {/* Date of Birth */}
+                    <div>
+                        <div className="flex justify-between items-center font-Manrope-Medium text-[14px]">
+                            <label htmlFor="email" className="text-sm">
+                                Date of Birth <span className="text-red-500">*</span>
+                            </label>
+                        </div>
+                        <div className="mt-1 bg-white block w-full p-3 rounded-md shadow-sm sm:text-sm  outline-none focus:border focus:border-PrimaryColor-600" onClick={() => setSelectDate(true)}>
+                            {!selectedDate && (
+                                <p className="text-gray-600 cursor-pointer">Select Date of Birth</p>
+                            )}
+
+                            <div className="pl-12 mt-2">
+                                {selectedDate && (
+                                    <div className="flex items-center gap-x-2">
+                                        <p className="font-bold text-gray-500">Selected Date: </p>
+                                        <p>
+                                            {`${formattedDate.day} ${formattedDate.month}, ${formattedDate.year}`}
+                                        </p>
+                                    </div>
+                                )}
+                            </div>
+                        </div>
+                    </div>
+
                     {/* State */}
                     <div>
                         <div className="flex justify-between items-center font-Manrope-Medium text-[14px]">
@@ -147,21 +193,6 @@ const SignupForm: React.FC = () => {
                             id="country"
                             type="text"
                             placeholder="Enter your country"
-                            className="mt-1 bg-white block w-full p-3 rounded-md shadow-sm sm:text-sm  outline-none focus:border focus:border-PrimaryColor-600"
-                        />
-                    </div>
-
-                    <div>
-                        <div className="flex justify-between items-center font-Manrope-Medium text-[14px]">
-                            <label htmlFor="email" className="text-sm">
-                                Email Address <span className="text-red-500">*</span>
-                            </label>
-                            {errors.email?.message && (<span className="text-red-700 text-sm">{errors.email?.message}</span>)}
-                        </div>
-                        <input
-                            {...register("email")}
-                            type="email"
-                            placeholder="Enter your email"
                             className="mt-1 bg-white block w-full p-3 rounded-md shadow-sm sm:text-sm  outline-none focus:border focus:border-PrimaryColor-600"
                         />
                     </div>
@@ -239,6 +270,13 @@ const SignupForm: React.FC = () => {
                 </p>
             </form>
 
+
+            {selectDate && (
+                <Modal closeModal={() => setSelectDate(false)}>
+                    <ScheduleDatePicker startDate={new Date()} setDate={(date) => setSelectedDate(date)} onClose={() => setSelectDate(false)} />
+                </Modal>
+            )}
+
             <Toaster />
         </>
     )
@@ -246,3 +284,28 @@ const SignupForm: React.FC = () => {
 
 
 export default SignUpPage
+
+
+/**
+ * 
+ * country: "NIgeria"
+​
+dob: "2025-10-17"
+​
+email: "orisekeemmanuel@gmail.com"
+​
+full_name: "Nnameemka Onyejeme"
+​
+is_staff: false
+​
+is_superuser: false
+​
+password: "pbkdf2_sha256$1000000$08enG1c7hhzOYwG9EX9SX1$ZynscOikbqB77Cg7uwvUM3r7XY3wG6Z+xdeDC0Z1/Qo="
+​
+state: "Lagos"
+​
+type: "P"
+​
+username: "mightGuuy"
+ * 
+ */

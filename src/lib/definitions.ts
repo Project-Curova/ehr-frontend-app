@@ -9,6 +9,7 @@ export enum NAVIGATION {
 
      /*************************** Login Routes ********************************************/
     LOGIN = "/login",
+    ADMIN_LOGIN = "/login/admin",
     SIGNUP = "/signup",
     // VERIFY_EMAIL = `${LOGIN}/verify-email`,
     // VERIFY_OTP = `${LOGIN}/verify`,

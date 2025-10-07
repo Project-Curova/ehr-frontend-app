@@ -81,3 +81,18 @@ export type SignInResponse = {
     usernane: string
     tokens: string
 }
+
+export type SignOutRequest = {
+    refresh: string
+}
+
+export type SignOutResponse = {
+    status: number,
+    data: {
+        id: string,
+        success: boolean,
+        message: string,
+        statusCode: number,
+        result: null | unknown
+    }
+}

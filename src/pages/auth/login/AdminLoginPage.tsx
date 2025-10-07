@@ -3,17 +3,16 @@ import classNames from "classnames";
 import { useState } from "react";
 import { useForm, type SubmitHandler } from "react-hook-form";
 import toast, { Toaster } from "react-hot-toast";
-import { Link, useNavigate } from "react-router";
+import { useNavigate } from "react-router";
 import { BeatLoader } from "react-spinners";
 import { useSigninMutation } from "../../../app/services/auth/auth";
 import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
-import googleLogo from "../../../assets/auth/google.png";
 import HeroImg from "../../../assets/hero.svg";
 import { LoginSchema, type LoginFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override } from "../../../lib/definitions";
 
-const LoginPage = () => {
+const AdminLoginPage = () => {
     return (
         <div id="login" className="block md:grid grid-cols-2 h-screen">
             {/* Login Form */}
@@ -29,7 +28,7 @@ const LoginPage = () => {
             {/* Login Hero Image */}
             <div className="bg-[#033856] p-8 text-white">
                 <img src={HeroImg} className="w-[150px] mx-auto" alt="hero" />
-                <h3 className="mt-[12%] font-bold text-[30px] text-center">Welcome back to Curova</h3>
+                <h3 className="mt-[12%] font-bold text-[30px] text-center">Admin Login</h3>
                 <p className="mt-5 font-medium">The Complete Intelligence Platform for Modern Healthcare.</p>
             </div>
         </div>
@@ -52,8 +51,7 @@ const Login: React.FC = () => {
 
         try {
             // Verify user email
-            const response = await signInUser({ username: userData.username, password: userData.password }).unwrap();
-            console.log(response);
+            await signInUser({ username: userData.username, password: userData.password }).unwrap();
             navigate(NAVIGATION.HOME);
         } catch (error) {
             if (typeof error == 'object' && error != null) {
@@ -107,7 +105,6 @@ const Login: React.FC = () => {
                                 {passwordShown ? <img src={EyeOpen} alt="password visible" /> : <img src={EyeClose} alt="password visible" />}
                             </div>
                         </div>
-                        <Link className="text-brown font-OpenSans-Medium block text-end mt-2 text-sm w-max ml-auto" to={NAVIGATION.FORGOT_PASSWORD}>Forgot Password ?</Link>
                     </div>
                 </div>
 
@@ -126,33 +123,11 @@ const Login: React.FC = () => {
                     />
                 ) : "Login"}</button>
 
-                {/* Sign Up Section */}
-                <p className="mt-2 text-sm text-center">
-                    Don’t have an account?{' '}
-                    <Link to={NAVIGATION.SIGNUP} className="text-brown font-medium hover:underline">
-                        Sign up
-                    </Link>
-                </p>
             </form>
-
-            {/* Oauth Form */}
-            <p className="font-OpenSans-Bold text-center">OR</p>
-
-            <div className="flex flex-col md:flex-row items-center justify-center gap-4 mt-5">
-                {/* Google Sign-In */}
-                <button
-                    type="button"
-                    // onClick={}
-                    className="w-[300px] cursor-pointer mx-auto bg-white border border-gray-300 text-gray-700 py-2 rounded-md font-medium flex items-center justify-center hover:bg-gray-100 gap-x-4 text-sm"
-                >
-                    <img width={20} height={20} alt="Google" src={googleLogo} />
-                    {false ? "Signing in..." : " Log in with Google"}
-                </button>
-            </div>
 
             <Toaster />
         </>
     )
 }
 
-export default LoginPage
+export default AdminLoginPage

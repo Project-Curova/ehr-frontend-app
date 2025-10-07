@@ -15,7 +15,7 @@ type UserTokenType = {
     isPinLocked: boolean | null
 }
 
-// // Define the type for the auth state
+// Define the type for the auth state
 type AuthStateType = {
     "$id": string | null,
     "jwt": string | null,
