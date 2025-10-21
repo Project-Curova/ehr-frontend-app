@@ -1,17 +1,17 @@
-import type { SignInRequest, SignInResponse, SignOutRequest, SignOutResponse, SignupRequest, SignupResponse } from "../../../lib/auth/authLib";
+import type { GoogleSigninRequest, GoogleSigninResponse, SignInRequest, SignInResponse, SignOutRequest, SignOutResponse, SignupRequest, SignupResponse } from "../../../lib/auth/authLib";
 import { emptySplitApi } from "../api";
 
 export const authApi = emptySplitApi.injectEndpoints({
     
     // Define your endpoints to the server
     endpoints: (builder) => ({
-        // googleSignin: builder.mutation<GoogleSigninResponse, GoogleSigninRequest>({
-        //     query: (credentials) => ({
-        //         method: 'POST',
-        //         url: `User/UserManager/google_auth_sign_in`,
-        //         body: credentials
-        //     }),
-        // }),
+        googleSignin: builder.mutation<GoogleSigninResponse, GoogleSigninRequest>({
+            query: (credentials) => ({
+                method: 'POST',
+                url: `auth/google/`,
+                body: credentials
+            }),
+        }),
 
         // googleSignup: builder.mutation<GoogleSigninResponse, GoogleSigninRequest>({
         //     query: (credentials) => ({
@@ -71,4 +71,4 @@ export const authApi = emptySplitApi.injectEndpoints({
     })
 })
 
-export const { useSigninMutation, useSignupMutation, useSignoutMutation  } = authApi;
+export const { useSigninMutation, useSignupMutation, useSignoutMutation, useGoogleSigninMutation  } = authApi;

@@ -10,6 +10,7 @@ import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
 import googleLogo from "../../../assets/auth/google.png";
 import HeroImg from "../../../assets/hero.svg";
+import { useGoogleLoginHook } from "../../../hooks/auth/useGoogleLoginHook";
 import { LoginSchema, type LoginFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override } from "../../../lib/definitions";
 
@@ -42,10 +43,14 @@ const Login: React.FC = () => {
 
     const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
+      const [googleErrorMessage, setGoogleErrorMessage] = useState<string | undefined | null>(null);
+
     /***************************** FORM VALIDATION ******************************/
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
     const [signInUser, { isLoading: isSignInUserLoading }] = useSigninMutation();
+
+    const {googleLogin, isGoogleProfileLoading} = useGoogleLoginHook({setGoogleErrorMessage});
 
     // Submit from details to server and verify OTP
     async function loginUser(userData: LoginFormData) {
@@ -69,6 +74,11 @@ const Login: React.FC = () => {
     const onSubmit: SubmitHandler<LoginFormData> = (data: LoginFormData) => {
         loginUser(data);
     };
+
+    if (googleErrorMessage) {
+        setGoogleErrorMessage(null);
+        toast.error(googleErrorMessage);
+    }
 
     return (
         <>
@@ -142,11 +152,11 @@ const Login: React.FC = () => {
                 {/* Google Sign-In */}
                 <button
                     type="button"
-                    // onClick={}
+                    onClick={() => googleLogin()}
                     className="w-[300px] cursor-pointer mx-auto bg-white border border-gray-300 text-gray-700 py-2 rounded-md font-medium flex items-center justify-center hover:bg-gray-100 gap-x-4 text-sm"
                 >
                     <img width={20} height={20} alt="Google" src={googleLogo} />
-                    {false ? "Signing in..." : " Log in with Google"}
+                    {isGoogleProfileLoading ? "Signing in..." : " Log in with Google"}
                 </button>
             </div>
 

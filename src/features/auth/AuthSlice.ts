@@ -1,49 +1,27 @@
 import { createSlice, type PayloadAction } from "@reduxjs/toolkit";
+import type { SIGN_UP_TYPE } from "../../lib/definitions";
 
 // Define type to set User Email
-type UserTokenType = {
-    token: string | null;
-    isSecurityQuestionSet: boolean | null
-    signUpCouponExpiryDate: null | Date,
-    email: string | null
-    "isPinSet": boolean | null
-    "isUsersFirst100": boolean | null,
-    "isCouponViewed": boolean | null,
-    "isUserOAuth": boolean | null,
-    "user": string | null,
-    sessionExpired: boolean | null
-    isPinLocked: boolean | null
-}
+// type UserTokenType = {
+//     token: string | null;
+//     email: string | null
+// }
 
 // Define the type for the auth state
 type AuthStateType = {
-    "$id": string | null,
-    "jwt": string | null,
+    "id": string | null,
+    "token": string | null,
     "user": string | null,
-    "email": string | null
-    "isSecurityQuestionSet": boolean | null,
-    signUpCouponExpiryDate: null | Date,
-    "isPinSet": boolean | null,
-    "isUsersFirst100": boolean | null,
-    "isCouponViewed": boolean | null
-    "isUserOAuth": boolean | null,
-    sessionExpired: boolean | null,
-    isPinLocked: boolean | null
+    "email": string | null,
+    type: SIGN_UP_TYPE | null
 }
 
 const initialState: AuthStateType = {
-    "$id": null,
-    "jwt": null,
+    "id": null,
+    "token": null,
     "user": null,
     email: null,
-    "isSecurityQuestionSet": null,
-    signUpCouponExpiryDate: null,
-    "isPinSet": null,
-    "isUsersFirst100": null,
-    "isCouponViewed": null,
-    isUserOAuth: null,
-    sessionExpired: null,
-    isPinLocked: null
+    type: null
 }
 
 // Create the Auth Slice
@@ -52,19 +30,12 @@ const AuthSlice = createSlice({
     initialState,
     reducers: {
         // Set user token
-        setUserDetails: (state, action: PayloadAction<Partial<UserTokenType>>) => {
-            const { token, isSecurityQuestionSet, isPinSet, isCouponViewed, isUsersFirst100, email, isUserOAuth, user, signUpCouponExpiryDate, sessionExpired, isPinLocked } = action.payload
-            if (token) state.jwt = token
-            if (isSecurityQuestionSet !== undefined) state.isSecurityQuestionSet = isSecurityQuestionSet
-            if (isPinSet !== undefined) state.isPinSet = isPinSet
-            if (isCouponViewed !== undefined) state.isCouponViewed = isCouponViewed
-            if (isUsersFirst100 !== undefined) state.isUsersFirst100 = isUsersFirst100
+        setUserDetails: (state, action: PayloadAction<Partial<AuthStateType>>) => {
+            const { token, email, user, type } = action.payload
+            if (token) state.token = token
             if (email !== undefined) state.email = email
-            if (isUserOAuth !== undefined) state.isUserOAuth = isUserOAuth
             if (user !== undefined) state.user = user
-            if (signUpCouponExpiryDate) state.signUpCouponExpiryDate = signUpCouponExpiryDate
-            if (sessionExpired) state.sessionExpired = sessionExpired
-            if (isPinLocked) state.isPinLocked = isPinLocked
+            if (type !== undefined) state.type = type
         },
 
         // Set user /admin state to null, all protected routes will redirect to login pages
@@ -72,21 +43,21 @@ const AuthSlice = createSlice({
             return initialState
         },
 
-        lockUserPin: (state) => {
-            state.isPinLocked = true
-        },
+        // lockUserPin: (state) => {
+        //     state.isPinLocked = true
+        // },
 
-        expireSession: (state) => {
-            state.sessionExpired = true
-        },
+        // expireSession: (state) => {
+        //     state.sessionExpired = true
+        // },
 
-        resetSession: (state) => {
-            state.sessionExpired = null
-        },
+        // resetSession: (state) => {
+        //     state.sessionExpired = null
+        // },
 
-        setCouponViewed: (state) => {
-            state.isCouponViewed = true
-        }
+        // setCouponViewed: (state) => {
+        //     state.isCouponViewed = true
+        // }
     },
 });
 

@@ -77,10 +77,16 @@ export type SignInRequest = {
 }
 
 export type SignInResponse = {
-    password: string
-    usernane: string
-    tokens: string
+    detail: string
+    email: string
+    tokens: {
+        refresh: string,
+        access: string,
+    },
+    username: string
 }
+
+
 
 export type SignOutRequest = {
     refresh: string
@@ -95,4 +101,22 @@ export type SignOutResponse = {
         statusCode: number,
         result: null | unknown
     }
+}
+
+export type GoogleSigninRequest = {
+    token: string
+}
+
+export type GoogleSigninResponse = {
+   data: {
+    access: string,
+    refresh: string,
+    user: {
+        id: number,
+        email: string,
+        full_name: string,
+        type: SIGN_UP_TYPE,
+        username: string 
+    }
+   }
 }

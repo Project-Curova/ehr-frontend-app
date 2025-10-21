@@ -20,7 +20,7 @@ const useLogoutHook = () => {
             // Purge local storage
             persistor.purge();
             dispatch(AuthSliceActions.logout());
-            dispatch(AuthSliceActions.resetSession());
+            // dispatch(AuthSliceActions.resetSession());
             navigate(NAVIGATION.LOGIN)
         } catch (error) {
             if (typeof error == 'object' && error != null) {

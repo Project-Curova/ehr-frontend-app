@@ -9,9 +9,9 @@ const RequireAuth = () => {
     // Check the store for any existing user? Return children routes : Direct them to login page
     const user = useAppSelector((state) => state.authUser)
 
-    // if (!user.jwt) {
-    //     return <Navigate to="/login" state={{ from: location }} replace />
-    // }
+    if (!user.token) {
+        return <Navigate to="/login" state={{ from: location }} replace />
+    }
 
     return (
         <>
