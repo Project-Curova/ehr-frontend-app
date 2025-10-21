@@ -18,6 +18,10 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
     const [googleLoginResponse, setGoogleLoginResponse] = useState<GoogleSigninResponse | null>(null);
     const [signinWithGoogle, { error: GoogleProfileLoginError, isError: isGoogleProfileLoginError, isLoading: isGoogleProfileLoginLoading, isSuccess: isGoogleProfileLoginSuccess }] = useGoogleSigninMutation();
 
+    console.log(GOOGLE_CLIENT_ID);
+    console.log(GOOGLE_CLIENT_SECRET);
+    console.log(GOOGLE_REDIRECT_URL);
+
     const googleLogin = useGoogleLogin({
         flow: 'auth-code', // Use 'auth-code' to fetch tokens, including id_token
         scope: "openid profile email",
