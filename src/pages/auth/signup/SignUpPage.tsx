@@ -10,10 +10,10 @@ import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
 import HeroImg from "../../../assets/hero.svg";
 import Modal from "../../../components/global/Modal";
-import ScheduleDatePicker from "../../../components/global/ScheduleDatePicker";
 import { SignUpSchema, type SignUpFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override, SIGN_UP_TYPE } from "../../../lib/definitions";
 import { formatDateToString, getFormattedDate } from "../../../utils/utils";
+import DatePicker from "../../../components/global/DatePicker";
 
 const SignUpPage = () => {
     return (
@@ -273,7 +273,7 @@ const SignupForm: React.FC = () => {
 
             {selectDate && (
                 <Modal closeModal={() => setSelectDate(false)}>
-                    <ScheduleDatePicker startDate={new Date()} setDate={(date) => setSelectedDate(date)} onClose={() => setSelectDate(false)} />
+                    <DatePicker startDate={new Date()} setDate={(date) => setSelectedDate(date)} onClose={() => setSelectDate(false)} />
                 </Modal>
             )}
 
