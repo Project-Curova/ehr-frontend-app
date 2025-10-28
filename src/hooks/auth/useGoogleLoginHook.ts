@@ -42,6 +42,7 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
                 });
 
                 const tokenResponse = await tokens.json();
+                console.log(tokenResponse);
                 const response = await signinWithGoogle({ token: tokenResponse.id_token }).unwrap();
                 setIsGoogleSigninLoading(false);
 
