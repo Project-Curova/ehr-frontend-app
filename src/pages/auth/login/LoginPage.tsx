@@ -10,7 +10,9 @@ import EyeClose from "../../../assets/auth/eye_close.svg";
 import EyeOpen from "../../../assets/auth/eye_open.svg";
 import googleLogo from "../../../assets/auth/google.png";
 import HeroImg from "../../../assets/hero.svg";
+import { AuthSliceActions } from "../../../features/auth/AuthSlice";
 import { useGoogleLoginHook } from "../../../hooks/auth/useGoogleLoginHook";
+import { useAppDispatch } from "../../../hooks/typedHooks";
 import { LoginSchema, type LoginFormData } from "../../../lib/auth/authLib";
 import { NAVIGATION, override } from "../../../lib/definitions";
 
@@ -43,14 +45,16 @@ const Login: React.FC = () => {
 
     const [passwordShown, setPasswordShown] = useState<boolean>(false);
 
-      const [googleErrorMessage, setGoogleErrorMessage] = useState<string | undefined | null>(null);
+    const [googleErrorMessage, setGoogleErrorMessage] = useState<string | undefined | null>(null);
+
+    const dispatch = useAppDispatch();
 
     /***************************** FORM VALIDATION ******************************/
     const { register, handleSubmit, formState: { errors } } = useForm<LoginFormData>({ resolver: zodResolver(LoginSchema) });
 
     const [signInUser, { isLoading: isSignInUserLoading }] = useSigninMutation();
 
-    const {googleLogin, isGoogleProfileLoading} = useGoogleLoginHook({setGoogleErrorMessage});
+    const { googleLogin, isGoogleProfileLoading } = useGoogleLoginHook({ setGoogleErrorMessage });
 
     // Submit from details to server and verify OTP
     async function loginUser(userData: LoginFormData) {
@@ -58,7 +62,10 @@ const Login: React.FC = () => {
         try {
             // Verify user email
             const response = await signInUser({ username: userData.username, password: userData.password }).unwrap();
-            console.log(response);
+            dispatch(AuthSliceActions.setUserDetails({
+                token: response.tokens.access,
+                user: response.username,
+            }));
             navigate(NAVIGATION.HOME);
         } catch (error) {
             if (typeof error == 'object' && error != null) {

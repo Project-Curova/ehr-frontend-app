@@ -26,7 +26,6 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
         onSuccess: async (codeResponse) => {
             setIsGoogleSigninLoading(true);
             try {
-                console.log(codeResponse);
                 // Exchange the authorization code for tokens
                 const tokens = await fetch('https://oauth2.googleapis.com/token', {
                     method: 'POST',
