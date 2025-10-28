@@ -3,7 +3,6 @@ import { useState } from "react";
 import { useNavigate } from "react-router";
 import { useGoogleSigninMutation } from "../../app/services/auth/auth";
 import { AuthSliceActions } from "../../features/auth/AuthSlice";
-import type { GoogleSigninResponse } from "../../lib/auth/authLib";
 import { GOOGLE_CLIENT_ID, GOOGLE_CLIENT_SECRET, GOOGLE_REDIRECT_URL, NAVIGATION } from "../../lib/definitions";
 import { useAppDispatch } from "../typedHooks";
 
@@ -15,7 +14,6 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
     const [isGoogleSigninLoading, setIsGoogleSigninLoading] = useState<boolean>(false);
-    const [googleLoginResponse, setGoogleLoginResponse] = useState<GoogleSigninResponse | null>(null);
     const [signinWithGoogle, { error: GoogleProfileLoginError, isError: isGoogleProfileLoginError, isLoading: isGoogleProfileLoginLoading, isSuccess: isGoogleProfileLoginSuccess }] = useGoogleSigninMutation();
 
     console.log(GOOGLE_CLIENT_ID);
@@ -47,13 +45,12 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
                 const tokenResponse = await tokens.json();
                 const response = await signinWithGoogle({ token: tokenResponse.id_token }).unwrap();
                 setIsGoogleSigninLoading(false);
-                setGoogleLoginResponse(response);
 
                 dispatch(AuthSliceActions.setUserDetails({
-                  token: response.data.access,
-                  user: response.data.user.full_name,
-                  id: `${response.data.user.id}`,
-                  type: response.data.user.type
+                  token: response.access,
+                  user: response.user.full_name,
+                  id: `${response.user.id}`,
+                  type: response.user.type
                 }));
 
                 navigate(NAVIGATION.HOME);
@@ -66,7 +63,6 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
 
     return {
         googleLogin,
-        googleLoginResponse,
         isGoogleProfileLoading: isGoogleProfileLoginLoading || isGoogleSigninLoading,
         isGoogleProfileError: isGoogleProfileLoginError,
         GoogleProfileError: GoogleProfileLoginError,

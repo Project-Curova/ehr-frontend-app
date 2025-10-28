@@ -108,7 +108,6 @@ export type GoogleSigninRequest = {
 }
 
 export type GoogleSigninResponse = {
-   data: {
     access: string,
     refresh: string,
     user: {
@@ -116,7 +115,6 @@ export type GoogleSigninResponse = {
         email: string,
         full_name: string,
         type: SIGN_UP_TYPE,
-        username: string 
+        username: string
     }
-   }
 }
