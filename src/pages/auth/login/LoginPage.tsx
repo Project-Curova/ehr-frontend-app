@@ -58,13 +58,13 @@ const Login: React.FC = () => {
 
     // Submit from details to server and verify OTP
     async function loginUser(userData: LoginFormData) {
-
         try {
             // Verify user email
             const response = await signInUser({ username: userData.username, password: userData.password }).unwrap();
             dispatch(AuthSliceActions.setUserDetails({
                 token: response.tokens.access,
                 user: response.username,
+                refresh: response.tokens.refresh
             }));
             navigate(NAVIGATION.HOME);
         } catch (error) {

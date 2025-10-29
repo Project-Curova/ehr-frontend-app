@@ -50,11 +50,13 @@ export const useGoogleLoginHook = ({ setGoogleErrorMessage }: UseGoogleLoginHook
                   token: response.access,
                   user: response.user.full_name,
                   id: `${response.user.id}`,
-                  type: response.user.type
+                  type: response.user.type,
+                  refresh: response.refresh
                 }));
 
                 navigate(NAVIGATION.HOME);
             } catch (error) {
+                setIsGoogleSigninLoading(false);
                 console.error('Error during token exchange:', error);
                 setGoogleErrorMessage("Error signing into Google!");
             }

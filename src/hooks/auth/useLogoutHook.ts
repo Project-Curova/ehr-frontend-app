@@ -3,11 +3,12 @@ import { useSignoutMutation } from "../../app/services/auth/auth";
 import { persistor } from "../../app/store";
 import { AuthSliceActions } from "../../features/auth/AuthSlice";
 import { NAVIGATION } from "../../lib/definitions";
-import { useAppDispatch } from "../typedHooks";
+import { useAppDispatch, useAppSelector } from "../typedHooks";
 
 const useLogoutHook = () => {
 
     const dispatch = useAppDispatch();
+    const user = useAppSelector(state => state.authUser);
     const navigate = useNavigate();
 
     const [signOutUser, { isLoading: isSignOutUserLoading }] = useSignoutMutation();
@@ -15,12 +16,10 @@ const useLogoutHook = () => {
     async function logoutUser() {
         try {
             // Verify user email
-            const response = await signOutUser({ refresh: "" }).unwrap();
-            console.log(response)
+            await signOutUser({ refresh: user.refresh ?? "" }).unwrap();
             // Purge local storage
             persistor.purge();
             dispatch(AuthSliceActions.logout());
-            // dispatch(AuthSliceActions.resetSession());
             navigate(NAVIGATION.LOGIN)
         } catch (error) {
             if (typeof error == 'object' && error != null) {

@@ -11,6 +11,7 @@ import type { SIGN_UP_TYPE } from "../../lib/definitions";
 type AuthStateType = {
     "id": string | null,
     "token": string | null,
+    "refresh": string | null,
     "user": string | null,
     "email": string | null,
     type: SIGN_UP_TYPE | null
@@ -19,9 +20,10 @@ type AuthStateType = {
 const initialState: AuthStateType = {
     "id": null,
     "token": null,
+    "refresh": null,
     "user": null,
     email: null,
-    type: null
+    type: null,
 }
 
 // Create the Auth Slice
@@ -31,7 +33,8 @@ const AuthSlice = createSlice({
     reducers: {
         // Set user token
         setUserDetails: (state, action: PayloadAction<Partial<AuthStateType>>) => {
-            const { token, email, user, type } = action.payload
+            const { token, email, user, type, refresh } = action.payload
+            if (refresh) state.refresh = refresh;
             if (token) state.token = token
             if (email !== undefined) state.email = email
             if (user !== undefined) state.user = user
